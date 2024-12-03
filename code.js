@@ -1,4 +1,4 @@
-function dijkstra(graph, sourceNode) {
+export function dijkstra(graph, sourceNode) {
   let dist = {};
   let list = [];
   let fin = new Set();
