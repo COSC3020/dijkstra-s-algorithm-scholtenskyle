@@ -1,3 +1,5 @@
+import { dijkstra } from "./code.js";
+
 function graph(nodes, edges) {
     let graph = {};
     for (let i = 0; i < nodes; i++) {
