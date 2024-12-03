@@ -1,58 +1,94 @@
 const fs = require('fs');
 eval(fs.readFileSync('code.js')+'');
 
-function newGraph(nodes, edges) {
-    let graph = {};
-    for (let i = 0; i < nodes; i++) {
-        graph[i] = {}; // Initialize an empty adjacency list for the node
-    }
-    edges.forEach(([src, dest, weight]) => {
-        graph[src][dest] = weight; // Add edge to adjacency list
-    });
-    return graph;
-}
+sourceNode = 0;
+graph1 = {};
+graph2 = { 0: [] };
+graph3 = {
+    0: [[1, 1]],
+    1: [[0, 1]],
+    2: [[3, 1]],
+    3: [[2, 1]],
+    4: []
+};
+graph4 = {
+    0: [[1, 1], [2, 4]],
+    1: [[2, 2], [0, 1]],
+    2: [[0, 4], [1, 2]]
+};
+graph5 = {
+    0: [[1, 5], [2, 2]],
+    1: [[3, 4]],
+    2: [[1, 1], [3, 7]],
+    3: []
+};
+graph6 = {
+    0: [[1, 1], [2, 2]],
+    1: [[3, 3], [4, 2]],
+    2: [],
+    3: [],
+    4: []
+};
+graph7 = {
+    0: [[1, -1], [2, 4]],
+    1: [[2, -2], [3, 3]],
+    2: [[3, 5]],
+    3: []
+};
 
-const testCases = [
-    {
-        graph: newGraph(4, [
-            [0, 1, 1],
-            [0, 2, 4],
-            [1, 2, 2],
-            [1, 3, 5],
-            [2, 3, 1],
-        ]),
-        sourceNode: 0,
-        expected: { 0: 0, 1: 1, 2: 3, 3: 4 },
+function arraysEqual(arr1, arr2) {
+    return JSON.stringify(arr1) === JSON.stringify(arr2);
+}
+const tests = [
+    { 
+        func: dijkstra, 
+        graph: graph1, 
+        result: {},
+        name: "Test 1" 
     },
-    {
-        graph: newGraph(1, []), // Single node
-        sourceNode: 0,
-        expected: { 0: 0 },
+    { 
+        func: dijkstra, 
+        graph: graph2, 
+        result: {'0': 0},
+        name: "Test 2" 
     },
-    {
-        graph: newGraph(4, []), // Disconnected graph
-        sourceNode: 0,
-        expected: { 0: 0, 1: Infinity, 2: Infinity, 3: Infinity },
+    { 
+        func: dijkstra, 
+        graph: graph3, 
+        result: {'0': 0, '1': 1, '2': Infinity, '3': Infinity, '4': Infinity},
+        name: "Test 3" 
     },
+    { 
+        func: dijkstra, 
+        graph: graph4, 
+        result: {'0': 0, '1': 1, '2': 3},
+        name: "Test 4" 
+    },
+    { 
+        func: dijkstra, 
+        graph: graph5, 
+        result: {'0': 0, '1': 3, '2': 2, '3': 7},
+        name: "Test 5" 
+    },
+    { 
+        func: dijkstra, 
+        graph: graph6, 
+        result: {'0': 0, '1': 1, '2': 2, '3': 4, '4': 3},
+        name: "Test 6" 
+    },
+    { 
+        func: dijkstra, 
+        graph: graph7, 
+        result: {'0': 0, '1': -1, '2': -3, '3': 2},
+        name: "Test 7" 
+    }
 ];
 
-function run() {
-    let passed = 0;
-    testCases.forEach(({ graph, sourceNode, expected }, index) => {
-        const result = dijkstra(graph, sourceNode);
-        const match = Object.keys(expected).every(
-            (node) => result[node] === expected[node]
-        );
-        if (match) {
-            console.log(`Test case ${index + 1}: Passed`);
-            passed++;
-        } else {
-            console.error(`Test case ${index + 1}: Failed`);
-            console.error(`Expected:`, expected);
-            console.error(`Got:`, result);
-        }
-    });
-    console.log(`${passed}/${testCases.length} tests passed.`);
-}
-
-run();
+tests.forEach(test => {
+    const output = test.func(test.graph, sourceNode);
+    if (arraysEqual(output, test.result)) {
+        console.log(`${test.name} successful`);
+    } else {
+        console.error(`${test.name} failed: ${output} != ${test.result}`);
+    }
+});
