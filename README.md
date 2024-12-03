@@ -23,3 +23,14 @@ inefficient.
 
 What is the big $\Theta$ complexity of your implementation? Add your
 answer, including your reasoning, to this markdown file.
+
+Within the code, the sorting function takes n*logn time to run, but since this is also within a while loop, it would take $$n^2*logn$$ to run. Then of course there are the 2 other for loops, adding 2n to the complexity. So the final complexity would be $$O(n^2*logn + 2n)$$.
+
+
+https://codedamn.com/news/nodejs/cannot-use-import-statement-outside-a-module
+
+https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/
+
+I used the sources above for help with debugging as well as better understanding this exercise's objective. I also used ChatGPT to help to understand more about the needed algorithm.
+
+I certify that I have listed all sources used to complete this exercise, including the use of any Large Language Models. All of the work is my own, except where stated otherwise. I am aware that plagiarism carries severe penalties and that if plagiarism is suspected, charges may be filed against me without prior notice.
