@@ -1,4 +1,5 @@
-import { dijkstra } from "./code.js";
+const fs = require('fs');
+eval(fs.readFileSync('code.js')+'');
 
 function graph(nodes, edges) {
     let graph = {};
