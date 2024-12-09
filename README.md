@@ -24,7 +24,7 @@ inefficient.
 What is the big $\Theta$ complexity of your implementation? Add your
 answer, including your reasoning, to this markdown file.
 
-Within the code, the sorting function takes $$n * logn$$ time to run, but since this is also within a while loop, it would take $$n^2 * logn$$ to run. Then of course there are the 2 other for loops, adding 2n to the complexity. So the final complexity would be $$O(n^2*logn + 2n)$$.
+Within the code, the sorting function takes $$V * logV$$ time to run, but since this is also within a while loop, it would take $$V^2 * logV$$ to run. Then of course there are the 2 other for loops, adding 2V to the complexity. So the final complexity would be $$O(V^2*logV + 2V)$$. Within this answer, we only get the vertices as variables, but these are somehwhat dependent on the edges with finding their actual values, just not for the complexity equation.
 
 
 https://codedamn.com/news/nodejs/cannot-use-import-statement-outside-a-module
